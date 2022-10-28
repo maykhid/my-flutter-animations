@@ -164,7 +164,7 @@ class _MyHomePageState extends State<MyHomePage> with TickerProviderStateMixin {
                               // color: Colors.black,
                               height: 40,
                               width: 40,
-                              child: Image.asset('lib/ball.png')),
+                              child: Image.asset('assets/images/ball.png')),
                         )),
 
                     // shadow
