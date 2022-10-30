@@ -1,6 +1,10 @@
 import 'dart:math';
 
 import 'package:flutter/material.dart';
+import 'package:flutter_animations/core/route/navigation_service.dart';
+import 'package:flutter_animations/core/route/navigator_key.dart';
+import 'package:flutter_animations/core/route/route_names.dart';
+import 'package:flutter_animations/core/route/router.dart';
 
 void main() {
   runApp(const MyApp());
@@ -16,22 +20,50 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home: const MyHomePage(title: 'Bouncing Ball'),
+      initialRoute: RouteRegistry.root,
+      navigatorKey: navigationKey,
+      onGenerateRoute: RouterSetup.generateRoute,
+    );
+  }
+}
+
+// BouncingBall(title: 'Bouncing Ball')
+
+class Home extends StatelessWidget {
+  const Home({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      // key: _navigationKey,
+      appBar: AppBar(
+        title: const Text('Home'),
+      ),
+      body: Column(
+        children: [
+          ListTile(
+            title: const Text('Bouncing Ball'),
+            onTap: () =>
+                NavigationService().navigateTo(RouteRegistry.bouncingBall),
+          ),
+        ],
+      ),
     );
   }
 }
 
 /// This code is a simple animation of a ball that starts and stops bouncing when the ball is pressed.
-class MyHomePage extends StatefulWidget {
-  const MyHomePage({super.key, required this.title});
+class BouncingBall extends StatefulWidget {
+  const BouncingBall({super.key, required this.title});
 
   final String title;
 
   @override
-  State<MyHomePage> createState() => _MyHomePageState();
+  State<BouncingBall> createState() => _BouncingBallState();
 }
 
-class _MyHomePageState extends State<MyHomePage> with TickerProviderStateMixin {
+class _BouncingBallState extends State<BouncingBall>
+    with TickerProviderStateMixin {
   late AnimationController _bouncingController;
   late AnimationController _rotationController;
   // late Animation<double> _height;
@@ -58,10 +90,11 @@ class _MyHomePageState extends State<MyHomePage> with TickerProviderStateMixin {
 
     _curve = CurvedAnimation(
         parent: _bouncingController,
-        curve: Curves.fastLinearToSlowEaseIn, // slow the ball down on getting to the top
+        curve: Curves
+            .fastLinearToSlowEaseIn, // slow the ball down on getting to the top
         reverseCurve: Curves.fastLinearToSlowEaseIn);
 
-    //? TweenSequence - I would simply define this as an array of tweens(TweenSequenceItem) you might want to animate through, it starts from the first item tween performs the interpolation and goes to the next tween item. Leaving this here for ref
+    //? TweenSequence - I would define this simply as an array of tweens(TweenSequenceItem) you might want to animate through, it starts from the first item tween performs the interpolation and goes to the next tween item. Leaving this here for ref
     // _height = TweenSequence(<TweenSequenceItem<double>>[
     //   TweenSequenceItem<double>(
     //       tween: Tween<double>(begin: 0, end: 500), weight: 50),
@@ -90,7 +123,7 @@ class _MyHomePageState extends State<MyHomePage> with TickerProviderStateMixin {
     //   // tween: Tween<Offset>(begin: const Offset(0, -70), end: const Offset(0, 0)), weight: 50),
     // ]).animate(_curve as Animation<double>);
 
-    //? Tween<T>.animate - This basically is a class that makes a particular animation interpolate between a ‘begin’ value and an ‘end’ value. 
+    //? Tween<T>.animate - This basically is a class that makes a particular animation interpolate between a ‘begin’ value and an ‘end’ value.
     _offset =
         Tween<Offset>(begin: const Offset(0, 0), end: const Offset(0, -250))
             .animate(_curve as Animation<double>);
@@ -148,8 +181,10 @@ class _MyHomePageState extends State<MyHomePage> with TickerProviderStateMixin {
                     _rotationController.stop();
                   } else {
                     // continue animation from where it stopped
-                    _bouncingController.forward(from: _bouncingController.value);
-                    _rotationController.forward(from: _rotationController.value);
+                    _bouncingController.forward(
+                        from: _bouncingController.value);
+                    _rotationController.forward(
+                        from: _rotationController.value);
                   }
                 },
                 child: Column(
@@ -157,7 +192,8 @@ class _MyHomePageState extends State<MyHomePage> with TickerProviderStateMixin {
                   children: [
                     // ball
                     Transform.translate(
-                        offset: _offset.value, // uses the offset value to move the ball upwards and downwards
+                        offset: _offset
+                            .value, // uses the offset value to move the ball upwards and downwards
                         child: RotationTransition(
                           turns: _rotationController,
                           child: SizedBox(
