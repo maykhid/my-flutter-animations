@@ -1,7 +1,6 @@
 import 'dart:math';
 
 import 'package:flutter/material.dart';
-import 'package:flutter_animations/core/route/navigation_service.dart';
 import 'package:flutter_animations/core/route/navigator_key.dart';
 import 'package:flutter_animations/core/route/route_names.dart';
 import 'package:flutter_animations/core/route/router.dart';
