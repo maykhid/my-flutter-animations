@@ -20,6 +20,11 @@ class Home extends StatelessWidget {
             onTap: () =>
                 NavigationService().navigateTo(RouteRegistry.bouncingBall),
           ),
+          ListTile(
+            title: const Text('Multiple Bouncing Balls'),
+            onTap: () =>
+                NavigationService().navigateTo(RouteRegistry.multipleBouncingBalls),
+          ),
         ],
       ),
     );
