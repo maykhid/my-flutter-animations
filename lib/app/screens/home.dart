@@ -25,6 +25,11 @@ class Home extends StatelessWidget {
             onTap: () =>
                 NavigationService().navigateTo(RouteRegistry.multipleBouncingBalls),
           ),
+          ListTile(
+            title: const Text('Running Late'),
+            onTap: () =>
+                NavigationService().navigateTo(RouteRegistry.runningLate),
+          ),
         ],
       ),
     );
