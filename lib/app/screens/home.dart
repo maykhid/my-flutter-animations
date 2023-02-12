@@ -22,17 +22,21 @@ class Home extends StatelessWidget {
           ),
           ListTile(
             title: const Text('Multiple Bouncing Balls'),
-            onTap: () =>
-                NavigationService().navigateTo(RouteRegistry.multipleBouncingBalls),
+            onTap: () => NavigationService()
+                .navigateTo(RouteRegistry.multipleBouncingBalls),
           ),
           ListTile(
             title: const Text('Running Late'),
             onTap: () =>
                 NavigationService().navigateTo(RouteRegistry.runningLate),
           ),
+          ListTile(
+            title: const Text('Rotate Box Around X-Y-Z Axis'),
+            onTap: () => NavigationService()
+                .navigateTo(RouteRegistry.rotateBoxAroundXYZAxis),
+          ),
         ],
       ),
     );
   }
 }
-

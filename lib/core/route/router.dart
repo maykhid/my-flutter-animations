@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_animations/app/screens/box_rotates_X_Y_Z_axis.dart';
 import 'package:flutter_animations/app/screens/multi_bouncing_balls.dart';
 // import 'package:flutter_animations/app/screens/running_late.dart';
 import 'package:flutter_animations/core/route/route_names.dart';
@@ -16,8 +17,8 @@ class RouterSetup {
             builder: (_) => const BouncingBall(title: 'Bouncing Ball'));
       case RouteRegistry.multipleBouncingBalls:
         return MaterialPageRoute(builder: (_) => const MultiBouncingBalls());
-      // case RouteRegistry.runningLate:
-      //   return MaterialPageRoute(builder: (_) => const RunningLate());
+      case RouteRegistry.rotateBoxAroundXYZAxis:
+        return MaterialPageRoute(builder: (_) => const RotateBoxAroundYAxis());
       default:
         return MaterialPageRoute(builder: (_) => const Home());
     }
