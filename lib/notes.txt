@@ -1,0 +1,36 @@
+Animations In Flutter.
+
+Terminologies:
+
+Implicit Animations - These are animations that depends on you simply setting values that the animation can interpolate through.
+
+Explicit Animations - These are animations that requires you to set up a controller and "explicitly control" when it starts and ends, In fact you would need to control/manage the life cycle of the Animation controller.
+
+Interpolate - This is the process of animating through the old to new given values (when they change) of an animation. E.g an AnimatedContainer that takes a width parameter which is changed from 50 - 100, we can say the values interpolates from 50 to 100.
+
+Curves - This defines the way widget interpolates from old to new value. You can create custom curves by extending the Curves class.
+
+TweenAnimationBuilder - This is used in a situation where we do not have an available AnimatedFoo (where foo is the widget we want to animate e.g AnimateContainer), you can wrap your supposed widget with a TweenAnimationBuilder. 
+It has parameters such as tween which you put in values to interpolate through e.g ColorTween(begin: Colors.white, end: Colors.red), duration which specifies the time taken for the interpolation to happen and also a builder function that does the rendering of the set tween. 
+		- can only be used if:
+			the animations do not run infinitely
+			you want to control just one widget
+
+FooTransition(s) (explicit widget)- These are explicit animations that are kinda like AnimatedFoo difference being they have more explicit control with the controller being added.
+
+AnimatedBuilder(explicit widget) - These are alternatives to FooTransitions and are used when all of the available FooTransitions do not suit your use case.
+
+AnimatedWidget (explicit widget) - These are preferably used in cases where your AnimatedBuilder is beginning to look dirty or cumbersome, you could extract the AnimatedBuilder as a widget but this would be silly (in Emily Fortuna’s voice) since you are having a build method inside a build method (see image below, notice how we have the builder method inside the build method) so you can extract and extend the AnimatedWidget class instead. E.g 
+
+`class NewAnimation extends AnimatedWidget`
+￼
+Ticker - Ticker is an object that calls a function every frame.
+
+SingleTickerProviderStateMxinin - This is what we call during an animation to manage a Ticker.
+
+Tween.animate - This basically is a class that makes a particular animation interpolate between a ‘begin’ value and an ‘end’ value.
+
+TweenSequence - I would simply define this as an array of tweens(TweenSequenceItem) you might want to animate through, it starts from the first item tween performs the interpolation and goes to the next tween item.
+
+Notes
+The higher the duration the slower the animation
